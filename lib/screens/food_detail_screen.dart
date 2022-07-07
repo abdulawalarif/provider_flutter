@@ -1,27 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/foods.dart';
 
 class FoodDetailScreen extends StatelessWidget {
   static const routeName = '/food-detail';
-
-  final String id;
-  final String title;
-  final String description;
-  final double price;
-  final String imageUrl;
-
-  const FoodDetailScreen({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.price,
-    required this.imageUrl,
-  });
-
+  const FoodDetailScreen();
   @override
   Widget build(BuildContext context) {
+    final itemId = ModalRoute.of(context)!.settings.arguments as String;
+    final foodData = Provider.of<Foods>(context);
+    final food = foodData.findById(itemId);
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(food.title),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -30,7 +21,7 @@ class FoodDetailScreen extends StatelessWidget {
               height: 300,
               width: double.infinity,
               child: Image.asset(
-                imageUrl,
+                food.imageUrl,
                 fit: BoxFit.cover,
               ),
             ),
@@ -38,7 +29,7 @@ class FoodDetailScreen extends StatelessWidget {
               height: 10,
             ),
             Text(
-              '\$${price}',
+              '\$${food.price}',
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 20,
@@ -51,7 +42,7 @@ class FoodDetailScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 10),
               width: double.infinity,
               child: Text(
-                description,
+                food.description,
                 textAlign: TextAlign.center,
                 softWrap: true,
               ),
@@ -59,6 +50,4 @@ class FoodDetailScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
+    );}}

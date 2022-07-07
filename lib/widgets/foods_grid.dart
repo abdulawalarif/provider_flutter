@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:food_list_app/widgets/food_tem.dart';
+import 'package:provider/provider.dart';
 import '../providers/foods.dart';
 
 class FoodGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final productsData = Foods();
+    final productsData = Provider.of<Foods>(context);
     final products = productsData.items;
 
     return GridView.builder(
@@ -14,8 +15,6 @@ class FoodGrid extends StatelessWidget {
       itemBuilder: (ctx, i) => FoodItem(
         id: products[i].id,
         title: products[i].title,
-        description: products[i].description,
-        price: products[i].price,
         imageUrl: products[i].imageUrl,
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
