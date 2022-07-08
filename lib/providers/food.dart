@@ -1,4 +1,6 @@
-class Food {
+import 'package:flutter/material.dart';
+
+class Food extends ChangeNotifier{
   final String id;
   final String title;
   final String description;
@@ -14,4 +16,10 @@ class Food {
     required this.imageUrl,
     this.isFavorite = false,
   });
+
+
+  toggleFavoriteData(){
+    isFavorite = !isFavorite;
+    notifyListeners();
+  }
 }
