@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_list_app/providers/cart.dart';
 import 'package:food_list_app/providers/foods.dart';
 import 'package:provider/provider.dart';
 import 'screens/food_detail_screen.dart';
@@ -9,9 +10,12 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_)=>Foods(),
-      child:MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_)=>Foods()),
+        ChangeNotifierProvider(create: (_)=>Cart()),
+      ],
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Food Order',
         theme: ThemeData(
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
         routes: {
           FoodDetailScreen.routeName:(context) => FoodDetailScreen(),
         },
-      )
+      ),
     );
 
   }
