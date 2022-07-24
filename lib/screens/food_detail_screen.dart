@@ -4,12 +4,16 @@ import '../providers/foods.dart';
 
 class FoodDetailScreen extends StatelessWidget {
   static const routeName = '/food-detail';
-  const FoodDetailScreen();
+
+  FoodDetailScreen();
+
   @override
   Widget build(BuildContext context) {
     final itemId = ModalRoute.of(context)!.settings.arguments as String;
+
     final foodData = Provider.of<Foods>(context);
     final food = foodData.findById(itemId);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(food.title),
@@ -25,9 +29,7 @@ class FoodDetailScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             Text(
               '\$${food.price}',
               style: TextStyle(
@@ -46,8 +48,10 @@ class FoodDetailScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 softWrap: true,
               ),
-            ),
+            )
           ],
         ),
       ),
-    );}}
+    );
+  }
+}

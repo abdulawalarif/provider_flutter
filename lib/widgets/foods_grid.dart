@@ -3,17 +3,17 @@ import 'package:food_list_app/widgets/food_tem.dart';
 import 'package:provider/provider.dart';
 import '../providers/foods.dart';
 
-class FoodGrid extends StatelessWidget {
+class FoodsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Foods>(context);
-    final products = productsData.items;
+    final foodsData = Provider.of<Foods>(context);
+    final foods = foodsData.items;
 
     return GridView.builder(
       padding: const EdgeInsets.all(10.0),
-      itemCount: products.length,
+      itemCount: foods.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider(
-        create: (_)=>products[i],
+        create: (_) => foods[i],
         child: FoodItem(),
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

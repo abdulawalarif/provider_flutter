@@ -1,38 +1,38 @@
-import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
 import 'food.dart';
 
-class Foods extends ChangeNotifier{
+class Foods extends ChangeNotifier {
   List<Food> _items = [
     Food(
-        id: 'p1',
-        title: 'Burger',
-        description: 'This is The picture of A Burger..!',
-        price: 29.99,
-        imageUrl: 'assets/images/burger.jpg'),
+      id: 'f1',
+      title: 'Burger',
+      description: 'A Burger - A nice food!',
+      price: 29.99,
+      imageUrl: 'assets/images/burger.jpg',
+    ),
     Food(
-      id: 'p2',
+      id: 'f2',
       title: 'KFC',
       description: 'A nice pair of Food.',
       price: 59.99,
       imageUrl: 'assets/images/kfc.webp',
     ),
     Food(
-      id: 'p3',
+      id: 'f3',
       title: 'Chicken Fry',
       description: 'A Chicken - A nice food!',
       price: 19.99,
       imageUrl: 'assets/images/chicken.webp',
     ),
     Food(
-      id: 'p4',
+      id: 'f4',
       title: 'Pizza',
       description: 'A Pizza - A nice food!',
       price: 49.99,
       imageUrl: 'assets/images/pizza.jpg',
     ),
     Food(
-      id: 'p4',
+      id: 'f5',
       title: 'Sandwich',
       description: 'A Sandwich - A good food.',
       price: 49.99,
@@ -45,11 +45,21 @@ class Foods extends ChangeNotifier{
   }
 
   Food findById(String id) {
-    return _items.firstWhere((element) => element.id == id);
+    return _items.firstWhere((prod) => prod.id == id);
   }
 
   void addFood(Food value) {
     _items.add(value);
-    //notifyListeners();
+    notifyListeners();
+  }
+
+  void updateFood(Food value) {
+    _items[_items.indexWhere((element) => element.id == value.id)] = value;
+    notifyListeners();
+  }
+
+  void removeAFoodItem(String id) {
+    _items.removeAt(_items.indexWhere((element) => element.id == id));
+    notifyListeners();
   }
 }
